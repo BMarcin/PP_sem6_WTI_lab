@@ -6,6 +6,8 @@ http://pawel.misiorek.pracownik.put.poznan.pl/zajecia/wti/
 ## Laby 1
 ### Pliki zawierające rozwiązania
 + docker/redis/docker-compose.yml
+### Info
++ uruchomienie Redis'a komendą: ```docker-compose up```
 
 ## Laby 2
 ### Pliki zawierające rozwiązania
@@ -15,7 +17,7 @@ http://pawel.misiorek.pracownik.put.poznan.pl/zajecia/wti/
 + runnable/RedisClient-Reader.py
 + runnable/RedisClient-Writer.py
 ### Info
-Pandas lubi wywalać błędy przy wczytywaniu pliku CSV, jeżeli jako argument podajemy plik z rozszerzeniem .dat. W celu rozwiązania problemu wystarczy zmienić rozszerzenie z .dat na np. .dat.txt
++ Pandas lubi wywalać błędy przy wczytywaniu pliku CSV, jeżeli jako argument podajemy plik z rozszerzeniem .dat. W celu rozwiązania problemu wystarczy zmienić rozszerzenie z .dat na np. .dat.txt
 
 ## Laby 3
 ### Pliki zawierające rozwiązania
@@ -25,5 +27,5 @@ Pandas lubi wywalać błędy przy wczytywaniu pliku CSV, jeżeli jako argument p
 + runnable/MoviesFlaskAPITesterClient.py
 
 ### Info
-Błąd odnośnie Pandas jak w Labach wyżej
-Dodatkowo, ponoć uzycie funkcji agregującej w Pandas podczas pivot_table jest "ciekawą" funkcją wartą zaprezentowania w sprawku
++ Błąd odnośnie Pandas jak w Labach wyżej
++ Dodatkowo, ponoć uzycie funkcji agregującej w Pandas podczas pivot_table jest "ciekawą" funkcją wartą zaprezentowania w sprawku
