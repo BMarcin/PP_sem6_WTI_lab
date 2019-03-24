@@ -49,7 +49,11 @@ def rating():
 
 @app.route('/avg-genre-ratings/all-users', methods=["GET"])
 def all_users():
-    return pm.getClearPivot().to_json(orient='columns'), 200, {"Content-Type": "application/json"}
+    zwrot = []
+    for index, row in pm.getAvg().iterrows():
+        zwrot.append(json.loads(row.to_json(orient='columns')))
+
+    return jsonify(zwrot[0]), 200, {"Content-Type": "application/json"}
 
 
 
@@ -57,12 +61,9 @@ def all_users():
 def avg_user(userID):
     zwrot = []
     for index, row in pm.getPivotUser(userID).iterrows():
-        if index < 100:
-            zwrot.append(json.loads(row.to_json(orient='columns')))
-        else:
-            break
+        zwrot.append(json.loads(row.to_json(orient='columns')))
 
-    return jsonify(zwrot), 200, {"Content-Type": "application/json"}
+    return jsonify(zwrot[0]), 200, {"Content-Type": "application/json"}
 
 
 
