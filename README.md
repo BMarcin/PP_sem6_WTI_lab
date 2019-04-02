@@ -29,3 +29,22 @@ http://pawel.misiorek.pracownik.put.poznan.pl/zajecia/wti/
 ### Info
 + Błąd odnośnie Pandas jak w Labach wyżej
 + Dodatkowo, ponoć uzycie funkcji agregującej w Pandas podczas pivot_table jest "ciekawą" funkcją wartą zaprezentowania w sprawku
+
+
+## Laby 4
+### Pliki zawierające rozwiązania
++ [klasy/PandasMovies.py](https://github.com/BMarcin/PP_sem6_WTI_lab/blob/master/klasy/PandasMovies.py)
+
+### Konkretne funkcje
++ dfToDict(dataframe)
++ dictToDF(dictionary) - odpowiedź na zadanie 3
++ bezstratnosc() - odpowiedź na zadnie 4
++ getAvg() - odpowiedź na zadanie 5 part 1
++ rewriteRatingToGenreColumn() - odpowiedź na zadanie 5 part 2 (część diagnostyczna)
++ getPivotUser(userID) - odpowiedź na zadanie 6
++ getDifferenceWithAvgUser(userID) - odpowiedź na zadanie 7
+
+### Info
+W zadaniu 5 nie zrobiłem funkcji odpowiedzialnej za odejmowanie każdej oceny filmu dla użytkownika od średniej, bo było to opcjonalne 😊 Dla niektórych funkcji wprowadziłem lekkie usprawienia, które w sumie nic nie dały. Okazuje się, że część funkcji wykorzystywanych na tych labach miałem już gotową na labach 3 np. liczenie średnich.
+
+
