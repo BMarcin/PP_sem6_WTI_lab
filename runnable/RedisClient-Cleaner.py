@@ -5,9 +5,9 @@ x = 'aaa'
 
 r = RedisClient('localhost', 6379, 0)
 
-while True:
-    r.wyczysc()
+#while True:
+r.wyczysc()
 
-    print("cleared")
-    sleep(3)
+print("cleared")
+    #sleep(3)
 

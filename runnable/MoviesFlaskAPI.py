@@ -1,15 +1,24 @@
 from flask import Flask, jsonify, abort, request, make_response
 import json
 from klasy.PandasMovies import PandasMovies
+from klasy.PandasMovies import dictToDF
+
+
+
 
 
 ''' ZALADOWANIE FILMOW '''
-pm = PandasMovies()
-pivoted = pm.getPivotAllTable()
+pm = PandasMovies(datasetrows=5000, useRedis=True, RedisHost="localhost", RedisPort=6379, RedisDB=0)
+
+
+
 
 
 ''' DEFINICJA APKI '''
 app = Flask(__name__, static_url_path="")
+
+
+
 
 
 ''' DEFINICJE BLEDOW '''
@@ -19,15 +28,21 @@ def not_found(error):
 
 
 
+
+
 ''' WŁAŚCIWE ENDPOINTY '''
 @app.route('/ratings', methods=['DELETE'])
 def ratings():
+    result = request.get_json()
+    #pm.dropRecord(result["userID"], result["rating"], result["movieID"])
+    pm.fullDrop()
     return jsonify({}), 200, {"Content-Type": "application/json"}
 
 
 
 @app.route('/ratings', methods=["GET"])
 def xx():
+    pivoted = pm.getPivotAllTable()
     zwrot = []
 
     for index, row in pivoted.iterrows():
@@ -43,6 +58,8 @@ def xx():
 @app.route('/rating', methods=['POST'])
 def rating():
     result = request.get_json()
+    pm.appendRecord(result["userID"], result["rating"], result["movieID"])
+
     return jsonify(result), 200, {"Content-Type": "application/json"}
 
 
@@ -61,6 +78,19 @@ def all_users():
 def avg_user(userID):
     zwrot = []
     for index, row in pm.getPivotUser(userID).iterrows():
+        zwrot.append(json.loads(row.to_json(orient='columns')))
+
+    return jsonify(zwrot[0]), 200, {"Content-Type": "application/json"}
+
+
+''' end point odnoszacy sie do czesci '''
+#       "przy czym profil ten powinien być zbiorem
+#        różnic między średnią oceną filmów danego gatunku a średnią oceną filmów danego
+#        gatunku udzieloną przez danego użytkownika."
+@app.route('/profile/<int:userID>', methods=['GET'])
+def userprofile(userID):
+    zwrot = []
+    for index, row in pm.getDifferenceWithAvgUser(userID).iterrows():
         zwrot.append(json.loads(row.to_json(orient='columns')))
 
     return jsonify(zwrot[0]), 200, {"Content-Type": "application/json"}

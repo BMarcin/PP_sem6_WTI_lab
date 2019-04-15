@@ -1,3 +1,5 @@
+import time
+
 import requests
 
 class MovieFlaskAPITesterClient:
@@ -5,10 +7,10 @@ class MovieFlaskAPITesterClient:
         self._serviceAddress = serviceAddress
         self._post_json = {
             "genre-Action": 0,
-            "genre-Adventure": 1,
+            "genre-Adventure": 0,
             "genre-Animation": 0,
             "genre-Children": 0,
-            "genre-Comedy": 0,
+            "genre-Comedy": 1,
             "genre-Crime": 0,
             "genre-Documentary": 0,
             "genre-Drama": 0,
@@ -18,15 +20,15 @@ class MovieFlaskAPITesterClient:
             "genre-IMAX": 0,
             "genre-Musical": 0,
             "genre-Mystery": 0,
-            "genre-Romance": 0,
+            "genre-Romance": 1,
             "genre-Sci-Fi": 0,
             "genre-Short": 0,
             "genre-Thriller": 0,
             "genre-War": 0,
             "genre-Western": 0,
-            "movieID": 3,
-            "rating": 1.0,
-            "userID": 75
+            "movieID": 4,
+            "rating": 1,
+            "userID": 78
         }
 
     def testPostRatings(self):
@@ -40,7 +42,7 @@ class MovieFlaskAPITesterClient:
         print(myget.text)
 
     def testDeleteRatings(self):
-        mydelete = requests.delete(self._serviceAddress + '/ratings')
+        mydelete = requests.delete(self._serviceAddress + '/ratings', json=self._post_json)
         print("DELETE /ratings")
         print(mydelete.text)
 
@@ -51,7 +53,7 @@ class MovieFlaskAPITesterClient:
 
     def testGetAvgGenreRatins(self, userID):
         get2 = requests.get(self._serviceAddress + '/avg-genre-ratings/' + str(userID))
-        print("GET /avg-genre-ratings/78")
+        print("GET /avg-genre-ratings/"+str(userID))
         print(get2.text)
 
 
@@ -59,12 +61,20 @@ class MovieFlaskAPITesterClient:
 
 
 if __name__ == '__main__':
-    client = MovieFlaskAPITesterClient("http://localhost:5000")
+    client = MovieFlaskAPITesterClient("http://localhost:6161")
     client.testPostRatings()
-    client.testGetRatings()
-    client.testDeleteRatings()
-    client.testGetAvgGenreRatingsAllUsers()
-    client.testGetAvgGenreRatins(78)
+    #client.testGetRatings()
+    #time.sleep(5)
+    #client.testDeleteRatings()
+    #client.testGetAvgGenreRatingsAllUsers()
+    #client.testGetAvgGenreRatins(78)
+
+    ##ZADANIE 4 - brak bezstanowość
+    #client.testPostRatings()
+    #client.testGetAvgGenreRatingsAllUsers()
+    #print("ZRESTARTUJ API")
+    #input("ZRESTARTUJ API")
+    #client.testGetAvgGenreRatingsAllUsers()
 
 
 

@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\Marcin\GDrive\Studia\sem6\WTI\PP_sem6_WTI_lab\venv"
+VIRTUAL_ENV="C:\Users\Marcin Borzymowski\Dysk Google\Studia\sem6\WTI\PP_sem6_WTI_lab\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

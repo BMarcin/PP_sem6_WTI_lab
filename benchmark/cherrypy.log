@@ -1,0 +1,42 @@
+This is ApacheBench, Version 2.3 <$Revision: 1807734 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        CherryPy/18.1.1
+Server Hostname:        localhost
+Server Port:            6161
+
+Document Path:          /ratings
+Document Length:        44077 bytes
+
+Concurrency Level:      30
+Time taken for tests:   48.227 seconds
+Complete requests:      300
+Failed requests:        0
+Total transferred:      13271700 bytes
+HTML transferred:       13223100 bytes
+Requests per second:    6.22 [#/sec] (mean)
+Time per request:       4822.702 [ms] (mean)
+Time per request:       160.757 [ms] (mean, across all concurrent requests)
+Transfer rate:          268.74 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.8      0       4
+Processing:   527 4614 1575.0   4310   12181
+Waiting:      527 4613 1575.0   4310   12181
+Total:        531 4614 1574.7   4310   12181
+
+Percentage of the requests served within a certain time (ms)
+  50%   4310
+  66%   4846
+  75%   5306
+  80%   5751
+  90%   6444
+  95%   7540
+  98%   9180
+  99%  10949
+ 100%  12181 (longest request)

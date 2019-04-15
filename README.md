@@ -47,4 +47,17 @@ http://pawel.misiorek.pracownik.put.poznan.pl/zajecia/wti/
 ### Info
 W zadaniu 5 nie zrobiłem funkcji odpowiedzialnej za odejmowanie każdej oceny filmu dla użytkownika od średniej, bo było to opcjonalne 😊 Dla niektórych funkcji wprowadziłem lekkie usprawienia, które w sumie nic nie dały. Okazuje się, że część funkcji wykorzystywanych na tych labach miałem już gotową na labach 3 np. liczenie średnich.
 
+## Laby 5
+### Pliki zawierające rozwiązania
++ [klasy/PandasMovies.py](https://github.com/BMarcin/PP_sem6_WTI_lab/blob/master/klasy/PandasMovies.py)
++ [klasy/RedisClient.py](https://github.com/BMarcin/PP_sem6_WTI_lab/blob/master/klasy/RedisClient.py)
++ [runnable/MoviesCherryPyAPI.py](https://github.com/BMarcin/PP_sem6_WTI_lab/blob/master/runnable/MoviesCherryPyAPI.py)
++ [runnable/MoviesFlaskAPI.py](https://github.com/BMarcin/PP_sem6_WTI_lab/blob/master/runnable/MoviesFlaskAPI.py)
++ [runnable/MoviesFlaskAPITesterClient.py](https://github.com/BMarcin/PP_sem6_WTI_lab/blob/master/runnable/MoviesFlaskAPITesterClient.py)
+
+### Info
+Nie zrobiłem zadań opcjonalnych, czyli: 9 i 10.
+
+
+
 
