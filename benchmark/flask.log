@@ -13,30 +13,30 @@ Document Path:          /ratings
 Document Length:        39479 bytes
 
 Concurrency Level:      30
-Time taken for tests:   37.919 seconds
+Time taken for tests:   37.847 seconds
 Complete requests:      300
 Failed requests:        0
 Total transferred:      11898000 bytes
 HTML transferred:       11843700 bytes
-Requests per second:    7.91 [#/sec] (mean)
-Time per request:       3791.887 [ms] (mean)
-Time per request:       126.396 [ms] (mean, across all concurrent requests)
-Transfer rate:          306.42 [Kbytes/sec] received
+Requests per second:    7.93 [#/sec] (mean)
+Time per request:       3784.670 [ms] (mean)
+Time per request:       126.156 [ms] (mean, across all concurrent requests)
+Transfer rate:          307.01 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.8      0       4
-Processing:   144 3675 4768.2   1772   27163
-Waiting:      144 3675 4768.2   1771   27163
-Total:        145 3676 4768.4   1772   27165
+Processing:   144 3671 5162.2   1495   32757
+Waiting:      144 3670 5162.2   1494   32757
+Total:        144 3671 5162.3   1495   32757
 
 Percentage of the requests served within a certain time (ms)
-  50%   1772
-  66%   3761
-  75%   5226
-  80%   6722
-  90%  10612
-  95%  14380
-  98%  17328
-  99%  21471
- 100%  27165 (longest request)
+  50%   1495
+  66%   3609
+  75%   5266
+  80%   6924
+  90%  10177
+  95%  14280
+  98%  20101
+  99%  23059
+ 100%  32757 (longest request)
