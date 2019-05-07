@@ -65,11 +65,23 @@ class avg_all(object):
             return zwrot[0]
 
 
+@cherrypy.expose
+@cherrypy.tools.json_out()
+class profile(object):
+    @cherrypy.tools.accept(media="application/json")
+    def GET(self, arg):
+        zwrot = []
+        for index, row in pm.getDifferenceWithAvgUser(int(arg)).iterrows():
+            zwrot.append(json.loads(row.to_json(orient="columns")))
+
+        return zwrot
+
+
 
 
 
 if __name__ == '__main__':
-    pm = PandasMovies(datasetrows=5000, useRedis=True, RedisHost="localhost", RedisPort=6379, RedisDB=0)
+    pm = PandasMovies(datasetrows=2, useRedis=True, RedisHost="localhost", RedisPort=16786, RedisDB=0)
 
 
 
@@ -90,6 +102,7 @@ if __name__ == '__main__':
     cherrypy.tree.mount(ratings(), '/ratings', conf)
     cherrypy.tree.mount(rating(), "/rating", conf)
     cherrypy.tree.mount(avg_all(), "/avg-genre-ratings", conf)
+    cherrypy.tree.mount(profile(), "/profile", conf)
 
     cherrypy.engine.start()
     cherrypy.engine.block()

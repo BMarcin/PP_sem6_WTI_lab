@@ -1,6 +1,10 @@
 import time
 
+from klasy.PandasMovies import PandasMovies
+
 import requests
+
+import json
 
 class MovieFlaskAPITesterClient:
     def __init__(self, serviceAddress):
@@ -28,13 +32,23 @@ class MovieFlaskAPITesterClient:
             "genre-Western": 0,
             "movieID": 4,
             "rating": 1,
-            "userID": 78
+            "userID": 2
         }
 
-    def testPostRatings(self):
-        mypost = requests.post(self._serviceAddress + '/rating', json=self._post_json)
-        print("POST /rating")
-        print(mypost.text)
+    def testPostRatings(self, ilosc, start=0):
+        pm = PandasMovies(datasetrows=ilosc+start, useRedis=False)
+
+        cnt = 0
+
+        for index, row in pm.getPivotAllTable().iterrows():
+
+            if cnt > start:
+                tosend = json.loads(row.to_json(orient='columns'))
+                mypost = requests.post(self._serviceAddress + '/rating', json=tosend)
+                print("POST /rating")
+                print(mypost.text)
+
+            cnt=cnt+1
 
     def testGetRatings(self):
         myget = requests.get(self._serviceAddress + '/ratings')
@@ -56,18 +70,62 @@ class MovieFlaskAPITesterClient:
         print("GET /avg-genre-ratings/"+str(userID))
         print(get2.text)
 
+    def testGetProfile(self, userID):
+        get3 = requests.get(self._serviceAddress + '/profile/' + str(userID))
+        print("GET /profile/" + str(userID))
+        print(get3.text)
+
+
 
 
 
 
 if __name__ == '__main__':
     client = MovieFlaskAPITesterClient("http://localhost:6161")
-    client.testPostRatings()
+
+    client.testGetRatings()
+    client.testGetAvgGenreRatingsAllUsers()
+    client.testGetAvgGenreRatins(75)
+    client.testGetProfile(75)
+
+    print("\n\n")
+
+    client.testDeleteRatings()
+    client.testGetRatings()
+
+    print("\n\n")
+
+    client.testPostRatings(100)
+
+    print("\n\n")
+
+    client.testGetRatings()
+    client.testGetAvgGenreRatingsAllUsers()
+    client.testGetAvgGenreRatins(75)
+    client.testGetProfile(75)
+
+    print("\n\n")
+
+    client.testPostRatings(100, 100)
+
+    print("\n\n")
+
+    client.testGetRatings()
+    client.testGetAvgGenreRatingsAllUsers()
+    client.testGetAvgGenreRatins(75)
+    client.testGetProfile(75)
+
+    #client.testPostRatings()
     #client.testGetRatings()
-    #time.sleep(5)
-    #client.testDeleteRatings()
     #client.testGetAvgGenreRatingsAllUsers()
-    #client.testGetAvgGenreRatins(78)
+    #client.testGetProfile(75)
+
+    #client.testPostRatings()
+
+    #client.testGetProfile(75)
+    #client.testGetRatings()
+    #client.testGetAvgGenreRatingsAllUsers()
+    #client.testGetAvgGenreRatins(75)
 
     ##ZADANIE 4 - brak bezstanowość
     #client.testPostRatings()
@@ -75,6 +133,9 @@ if __name__ == '__main__':
     #print("ZRESTARTUJ API")
     #input("ZRESTARTUJ API")
     #client.testGetAvgGenreRatingsAllUsers()
+    #client.testGetRatings()
+    #client.testGetAvgGenreRatingsAllUsers()
+    #client.testGetAvgGenreRatins(11)
 
 
 

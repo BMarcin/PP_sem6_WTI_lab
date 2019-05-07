@@ -46,6 +46,9 @@ class PandasMovies:
         self._movie_genres_dummy = self._movie_genres.copy()
         self._movie_genres_dummy['dummy_column'] = 1
 
+        self._movie_genres_names = list({row["genre"] for index,row in self._movie_genres.iterrows()})
+        #print(self._movie_genres_names)
+
         joined = self._rated_movies.join(self._movie_genres, rsuffix='genres')
         self._tables = joined
 
@@ -87,6 +90,15 @@ class PandasMovies:
         self._joined = pd.merge(self._rated_movies[self._rated_movies.userID == userID], self._movie_genres, on="movieID")
         self._pivoted = self._joined.pivot_table(columns='genre', fill_value=0, aggfunc=np.mean, values="rating", dropna=False).add_prefix("genre-")
 
+        #print(list(self._pivoted.columns))
+
+        for colname in self._movie_genres_names:
+            if "genre-"+colname not in self._pivoted.columns:
+                #print(colname)
+                self._pivoted.insert(len(self._pivoted), "genre-"+colname, 0)
+
+        self._pivoted = self._pivoted.reindex(sorted(self._pivoted.columns), axis=1)
+
         return self._pivoted
 
 
@@ -94,7 +106,15 @@ class PandasMovies:
     ''' pobranie czystego pivota '''
     def getAvg(self):
         self._joined = pd.merge(self._rated_movies, self._movie_genres, on="movieID")
+        #print(self._joined)
         self._pivoted = self._joined.pivot_table(columns='genre', fill_value=0, aggfunc=np.mean, values="rating").add_prefix("genre-")
+
+        for colname in self._movie_genres_names:
+            if "genre-"+colname not in self._pivoted.columns:
+                #print(colname)
+                self._pivoted.insert(len(self._pivoted), "genre-"+colname, 0)
+
+        self._pivoted = self._pivoted.reindex(sorted(self._pivoted.columns), axis=1)
 
         return self._pivoted
 
@@ -103,7 +123,7 @@ class PandasMovies:
     ''' wektory roznic dla kazdego gatunku na podstawie srednich ocen filmow wystawionych przez usera '''
     def getDifferenceWithAvgUser(self, userID):
         return self.getAvg().subtract(self.getPivotUser(userID)).fillna(0)
-
+        #return self.getAvg() - self.getPivotUser(userID)
 
 
     ''' przepisanie ratingu pod kolumne z konkretnym gatunkiem '''
@@ -194,13 +214,19 @@ def bezstratnosc(df):
 
 
 if __name__ == '__main__':
-    pm = PandasMovies(datasetrows=2, useRedis=True, RedisHost="localhost", RedisPort=6379, RedisDB=0)
+    pm = PandasMovies(datasetrows=2, useRedis=False, RedisHost="localhost", RedisPort=6379, RedisDB=0)
     #pm = PandasMovies()
-    print(pm.getAvg())
-    pm.appendRecord(78, 5, 3)
+    #print(pm.getAvg())
+    #pm.appendRecord(78, 5, 3)
     #pm.fullDrop()
-    print(pm.getAvg())
+    #print(pm.getAvg())
 
+    print(pm.getPivotAllTable())
+
+    print(pm.getAvg())
+    print(pm.getDifferenceWithAvgUser(75))
+
+    print(pm.getPivotUser(75))
 
 
     #zad 4 lab4
