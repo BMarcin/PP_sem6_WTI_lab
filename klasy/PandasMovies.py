@@ -204,6 +204,9 @@ class PandasMovies:
         if self._useRedis == True:
             self._RClient.wyczysc_kolejke("_rated_movies")
 
+        if self._useCasandra == True:
+            self._CClient.clear_table()
+
     ''' funkcja reloadowania, po wiekszych zmianach '''
 
     def reloadRatedMovies(self):

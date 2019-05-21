@@ -56,6 +56,8 @@ class CassandraClient:
 
         zwrot = []
 
+        # moglo by nie byc hardcoded xD
+
         for row in rows:
             wiersz = {}
             wiersz["userID"] = row.userid
@@ -90,5 +92,5 @@ if __name__ == "__main__":
 
     # print(cc.get_data_table())
 
-    cc.clear_table()
+    # cc.clear_table()
     # print(cc.get_data_table())

@@ -81,7 +81,7 @@ class profile(object):
 
 
 if __name__ == '__main__':
-    pm = PandasMovies(datasetrows=2, useRedis=True, RedisHost="localhost", RedisPort=16786, RedisDB=0)
+    pm = PandasMovies(datasetrows=2, useRedis=False, RedisHost="localhost", RedisPort=16786, RedisDB=0, useCassandra=True, CassandraPort=9043, CassandraHost='localhost')
 
 
 
